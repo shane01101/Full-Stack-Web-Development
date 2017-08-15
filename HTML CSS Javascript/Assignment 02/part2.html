@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+<head> 
+			<title>Color Guessing Game</title> 
+</head> 
+	<body onload="do_game()">
+		<script>
+			var target;
+			var guess_input;
+			var finished = false;
+			var guesses = 0;
+			var colors = ["blue", "cyan", "gold", "green", "magenta", "orange", "red", "white", "yellow"];
+		
+			function do_game()
+			{
+				var random_number = Math.random() * 9;
+				var target_index = Math.floor(random_number);
+				target = colors[target_index];
+				alert("The color is " + target);
+				
+				while(!finished)
+				{
+					guess_input = prompt("I am thinking of one of these colors:\n\n"
+					+ "blue, cyan, gold, gray, green, magenta, orange, red, white, yellow\n\n"
+					+ "What color am I thinking of?");
+					
+					guesses += 1;
+					
+					finished = check_guess();
+				}
+			}
+			function check_guess()
+			{
+				if(colors.indexOf(guess_input) == -1)
+				{
+					alert("I don't recognize your color.\n\nPlease try again.");
+					return false;
+				}
+				else if (target < guess_input)
+				{
+					alert("Your guess is incorrect!\n\nHint: your color is alphabetically higher than mine.\n\nPlease try again.");
+					return false;
+				}
+				else if (target > guess_input)
+				{
+					alert("Your guess is incorrect!\n\nHint: your color is alphabetically lower than mine.\n\nPlease try again.");
+					return false;
+				}
+				else
+				{
+					alert("Congratulations! You have guessed the color!\n\nIt took you " 
+					+ guesses + " guesses to finish the game!\n\nYou can see the color in the background.");
+					myBody=document.getElementsByTagName("body")[0];
+					myBody.style.background=target;
+					return true;
+				}
+			}
+		</script>
+	</body> 
+</html>

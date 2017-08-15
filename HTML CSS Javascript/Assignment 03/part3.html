@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+	<head> 
+	<title>Matching Game</title> 
+	<style type="text/css">
+		img { position:absolute; }
+		div { position:absolute; 
+			  width:500px; 
+			  height:500px; }
+		#rightSide { left: 500px; 
+            border-left: 1px solid black; }
+	</style>
+	</head> 
+	<body>
+		<script>	
+			var numberOfFaces = 5;
+			var IMG = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png"
+			
+			
+			function generateFaces()
+			{
+				var theLeftSide = document.getElementById("leftSide");
+				var theRightSide = document.getElementById("rightSide");
+				
+				for(i = 0; i < numberOfFaces; i++)
+				{
+					var randTop = Math.random() * 401;
+					var top = Math.floor(randTop);
+					var randLeft = Math.random() * 401;
+					var left = Math.floor(randLeft);	
+					var img = document.createElement("IMG");
+					img.src = IMG;
+					img.style.top = top + "px";
+					img.style.left = left + "px";
+					//document.getElementById("leftSide").appendChild(img);
+					theLeftSide.appendChild(img);
+				}
+				
+				var leftSideImages = theLeftSide.cloneNode(true);
+				leftSideImages.removeChild(leftSideImages.lastChild);
+				theRightSide.appendChild(leftSideImages);
+			}
+			window.onload = generateFaces;
+		</script>
+		<h1>Matching Game</h1>
+		<p>Click on the extra smiling face of the left</h1>
+		<div id="leftSide"></div> 
+		<div id="rightSide"></div> 
+	</body> 
+</html>
